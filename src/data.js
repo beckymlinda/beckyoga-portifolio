@@ -47,10 +47,30 @@ export const facts = [
   { label: 'Biggest class', value: '20 people' },
 ]
 
-export const taughtAt = ['Bingu Stadium', 'Lake of Stars', 'Pilates by Bike', 'Koahkh Fit Gym', 'Stories by Lota']
+export const taughtAt = ['Stories by Lota', 'Pilates by Bike', 'Bingu Stadium', 'Lake of Stars', 'Koahkh Fit Gym']
 
 // Events with photos are shown as featured cards (newest first); the rest as a compact list.
 export const experience = [
+  {
+    place: 'Stories by Lota',
+    kind: 'Events',
+    date: '19 September 2026',
+    role: 'Event instructor',
+    text: 'Instructed at wellness events organised by Stories by Lota, including a "Pilates with the Bride" bridal session on the lawn.',
+    photos: [
+      { image: 'stories-by-lota', alt: 'A group on purple mats at a "Pilates with the Bride" event by Stories by Lota', pos: '62% 60%' },
+    ],
+  },
+  {
+    place: 'Pilates by Bike',
+    kind: 'Event',
+    date: '22 June 2026',
+    role: 'Event instructor',
+    text: 'Led a yoga session on the lawn at an outdoor event organised with Pilates by Bike.',
+    photos: [
+      { image: 'pilates-by-bike', alt: 'Becky leading a seated session on the lawn at a Pilates by Bike event', pos: '50% 42%' },
+    ],
+  },
   {
     place: 'Bingu Stadium',
     kind: 'Open class',
@@ -73,27 +93,11 @@ export const experience = [
     ],
   },
   {
-    place: 'Pilates by Bike',
-    kind: 'Event',
-    date: '22 June',
-    role: 'Event instructor',
-    text: 'Led a yoga session on the lawn at an outdoor event organised with Pilates by Bike.',
-    photos: [
-      { image: 'pilates-by-bike', alt: 'Becky leading a seated session on the lawn at a Pilates by Bike event', pos: '50% 42%' },
-    ],
-  },
-  {
     place: 'Koahkh Fit Gym, Area 22',
     kind: 'Gym',
     role: 'Yoga facilitator',
     text: 'Facilitating yoga classes for gym members in Area 22, Lilongwe.',
     video: true,
-  },
-  {
-    place: 'Stories by Lota',
-    kind: 'Events',
-    role: 'Event instructor',
-    text: 'Instructed yoga at wellness events organised by Stories by Lota.',
   },
   {
     place: 'Private & group clients',
