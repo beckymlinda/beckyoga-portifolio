@@ -412,6 +412,7 @@ function Experience({ onOpen }) {
                 <span className="exp-kind">{e.kind}</span>
                 <div>
                   <h3>{e.place}</h3>
+                  {e.date && <p className="exp-date">{e.date}</p>}
                   <p><strong>{e.role}.</strong> {e.text}</p>
                   {e.video && GYM_VIDEO && (
                     <a href="#in-class" className="text-link">Watch me teach here <ArrowIcon /></a>
@@ -428,7 +429,7 @@ function Experience({ onOpen }) {
               </div>
               <figcaption>
                 <span className="exp-kind">In class</span>
-                Teaching at Koahkh Fit Gym
+                Teaching at KoakhFit
               </figcaption>
             </figure>
           )}
