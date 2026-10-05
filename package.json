@@ -1,0 +1,22 @@
+{
+  "name": "becky-yoga-portfolio",
+  "version": "1.0.0",
+  "description": "Becky Yoga: teaching experience portfolio of Rabecca Mulinda",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-server && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.1"
+  },
+  "private": true
+}
