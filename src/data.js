@@ -12,10 +12,11 @@ export const whatsappLink = (text) =>
 export const DEFAULT_WHATSAPP_MESSAGE = "Hi Becky, I'd like to book a yoga class."
 
 // The 4-week flexibility programme has its own site
-export const FLEXIBILITY_PLAN_URL = 'https://becky-yoga.vercel.app'
+export const FLEXIBILITY_PLAN_URL = 'https://beckyoga.vercel.app'
 
 // Filled in at build time from whatever video is in public/videos/ (see vite.config.js)
 export const GYM_VIDEO = __GYM_VIDEO__
+export const GYM_VIDEO_POSTER = '/images/koakh-class-poster.webp'
 
 export const profile = {
   brand: 'Becky Yoga',
@@ -24,27 +25,28 @@ export const profile = {
   title: 'Certified Yoga Instructor',
   location: 'Lilongwe, Malawi',
   language: 'English',
-  photo: 'rabecca',
-  heroPhoto: 'wheel',
+  photo: 'standing-split',
+  heroPhoto: 'pool-wheel',
   bio: [
-    "I'm Rabecca Mulinda, but almost everyone knows me as Becky. I'm a certified yoga instructor teaching Vinyasa, Yin and a little Hatha, with every class taught in English.",
-    "I've taught in gyms, at festivals and alongside event organisers, from Koahkh Fit Gym in Area 22 to the Lake of Stars festival. My biggest class so far brought twenty people together at Bingu Stadium.",
-    'My classes are built to feel good. We warm up, stretch, release tension with yoga balls and massagers, and finish in meditation. You leave looser, lighter and calmer than you arrived.',
+    "I'm Rabecca Mulinda, but almost everyone knows me as Becky. I teach Vinyasa, Yin and a little Hatha, always in English, to private clients, groups, gyms and events.",
+    'My classes are built to feel good: we warm up, stretch, release tension with yoga balls and massagers, and finish in meditation. You leave looser, lighter and calmer than you arrived.',
   ],
 }
 
-export const stats = [
-  { value: '1st', label: 'Place in Yogasana, Online World Yoga Championship 2023' },
-  { value: '20', label: 'People in my biggest class, at Bingu Stadium' },
-  { value: '3', label: 'Styles taught: Vinyasa, Yin and Hatha' },
+export const facts = [
+  { label: 'Teaches in', value: 'English' },
+  { label: 'Based in', value: 'Lilongwe' },
+  { label: 'Biggest class', value: '20 people' },
 ]
+
+export const taughtAt = ['Lake of Stars', 'Koahkh Fit Gym', 'Bingu Stadium', 'Stories by Lota', 'Pilates by Bike']
 
 export const experience = [
   {
     place: 'Lake of Stars Festival',
     kind: 'Festival',
     role: 'Yoga instructor',
-    text: "Led yoga sessions for festival-goers at Lake of Stars, Malawi's best-known music and arts festival.",
+    text: "Led yoga sessions for festival-goers at Malawi's best-known music and arts festival.",
   },
   {
     place: 'Koahkh Fit Gym, Area 22',
@@ -57,7 +59,7 @@ export const experience = [
     place: 'Bingu Stadium',
     kind: 'Open class',
     role: 'Lead instructor',
-    text: 'My biggest class to date: twenty people warming up, stretching and breathing together.',
+    text: 'My biggest class to date: twenty people moving and breathing together.',
   },
   {
     place: 'Stories by Lota',
@@ -84,27 +86,23 @@ export const certificate = {
   title: 'Certificate of Merit',
   award: '1st position, Yogasana',
   event: '3rd Online World Yoga Championship 2023',
+  issuer: 'World Yoga Federation · Yoga Council of Asia · Yoga Association of India',
   training: 'Earned after three months of online yoga training with Shobhit Pandey, India.',
-  details: [
-    { label: 'Organised by', value: 'Yoga Council of Asia' },
-    { label: 'Hosted by', value: 'Yoga Association of India' },
-    { label: 'Affiliated with', value: 'World Yoga Federation' },
-    { label: 'Certificate no.', value: 'WYF/WYC/09/23' },
-    { label: 'Issued', value: '25 December 2023' },
-  ],
+  number: 'WYF/WYC/09/23',
+  issued: '25 December 2023',
 }
 
 export const classFlow = [
-  { step: 'Warm up', text: 'We start slowly, waking up the joints and muscles so your body is ready to open safely.' },
-  { step: 'Stretch', text: 'Yoga stretches and flows from Vinyasa, Yin and Hatha, adjusted to your level.' },
-  { step: 'Massage', text: 'Yoga balls and massagers release tension, so the stretch feels good rather than forced.' },
-  { step: 'Meditate', text: 'We close in stillness with meditation, so you leave calm and grounded.' },
+  { step: 'Warm up', text: 'Wake up the joints and muscles so the body can open safely.' },
+  { step: 'Stretch', text: 'Yoga stretches and flows, adjusted to your level.' },
+  { step: 'Massage', text: 'Yoga balls and massagers release tension.' },
+  { step: 'Meditate', text: 'Close in stillness, calm and grounded.' },
 ]
 
 export const styles = [
-  { name: 'Vinyasa', note: 'Main style', text: 'Flowing sequences linked to the breath. Builds heat, strength and stamina.' },
-  { name: 'Yin', note: 'Main style', text: 'Slow, quiet holds that sink deep. Ideal for flexibility, recovery and rest.' },
-  { name: 'Hatha', note: 'Occasionally', text: 'Foundational postures held with attention to alignment and breathing.' },
+  { name: 'Vinyasa', text: 'Flowing, breath-led sequences that build heat and strength.' },
+  { name: 'Yin', text: 'Slow, deep holds for flexibility, recovery and rest.' },
+  { name: 'Hatha', note: 'occasionally', text: 'Foundational postures with care for alignment.' },
 ]
 
 export const classes = [
@@ -128,6 +126,7 @@ export const classes = [
   {
     name: 'Flexibility training',
     price: 'Ask for rates',
+    short: 'Ask on WhatsApp',
     text: 'For people who want results: your splits, a flexible back and deeper backbends.',
     points: ['Front and side splits', 'Back flexibility and backbends', 'Step-by-step progressions'],
     cta: "Hi Becky, I'm interested in flexibility training (splits / back flexibility).",
@@ -136,8 +135,9 @@ export const classes = [
 ]
 
 export const gallery = [
-  { image: 'splits', alt: 'Becky in a front split with a deep backbend', caption: 'Front split with backbend', wide: true },
+  { image: 'splits', alt: 'Becky in a front split with a deep backbend', caption: 'Front split with backbend' },
+  { image: 'pool-split', alt: 'Becky in a side split with a backbend beside a garden pool', caption: 'Side split by the pool' },
   { image: 'headstand', alt: 'Becky holding a headstand against a red backdrop', caption: 'Headstand' },
   { image: 'wheel', alt: 'Becky in one-legged wheel pose on the grass', caption: 'One-legged wheel' },
-  { image: 'elbow-stand', alt: 'Becky in a deep forearm balance backbend at the wall', caption: 'Forearm balance backbend' },
+  { image: 'elbow-stand', alt: 'Becky in a deep forearm balance backbend at the wall', caption: 'Forearm balance' },
 ]

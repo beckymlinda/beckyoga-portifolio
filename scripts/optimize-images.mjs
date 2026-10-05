@@ -14,6 +14,9 @@ const photos = {
   'elbow-stand': { file: 'elbow-stand.jpg', extract: { left: 0, top: 200, width: 864, height: 1520 } },
   splits: { file: 'splits.jpg' },
   rabecca: { file: 'rabecca.jpg' },
+  'standing-split': { file: 'standing-split.jpg' },
+  'pool-split': { file: 'pool-split.jpg' },
+  'pool-wheel': { file: 'pool-wheel.jpg' },
   // Rendered from the certificate PDF; the larger size is for the full-screen view
   certificate: { file: 'certificate.png', widths: [480, 960, 1600], quality: 85 },
 }

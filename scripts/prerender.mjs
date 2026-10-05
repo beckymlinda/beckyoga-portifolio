@@ -32,7 +32,7 @@ const business = {
   name: profile.brand,
   description: `Private and group yoga classes (${styles.map((s) => s.name).join(', ')}) and flexibility training with ${profile.name}.`,
   url: `${SITE_URL}/`,
-  image: [`${SITE_URL}/images/og-image.jpg`, `${SITE_URL}/images/wheel-960.webp`],
+  image: [`${SITE_URL}/images/og-image.jpg`, `${SITE_URL}/images/${profile.heroPhoto}-960.webp`],
   telephone: PHONE_TEL.replace('tel:', ''),
   email: EMAIL,
   currenciesAccepted: 'MWK',

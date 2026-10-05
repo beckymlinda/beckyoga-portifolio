@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  PHONE_DISPLAY, PHONE_TEL, EMAIL, DEFAULT_WHATSAPP_MESSAGE, whatsappLink, GYM_VIDEO,
-  profile, stats, experience, certificate, classFlow, styles, classes, gallery,
+  PHONE_DISPLAY, PHONE_TEL, EMAIL, DEFAULT_WHATSAPP_MESSAGE, whatsappLink, GYM_VIDEO, GYM_VIDEO_POSTER,
+  profile, facts, taughtAt, experience, certificate, classFlow, styles, classes, gallery,
 } from './data.js'
 
 /* ---------- Icons ---------- */
@@ -94,6 +94,14 @@ function Label({ children, light }) {
   return <p className={`label ${light ? 'light' : ''}`}><Lotus size={16} />{children}</p>
 }
 
+function WhatsAppButton({ text = DEFAULT_WHATSAPP_MESSAGE, className = 'btn btn-primary', children = 'Book on WhatsApp', size }) {
+  return (
+    <a href={whatsappLink(text)} className={className} target="_blank" rel="noopener noreferrer">
+      <WhatsAppIcon size={size} /> {children}
+    </a>
+  )
+}
+
 // Fades elements with .reveal in as they scroll into view
 function useReveal() {
   useEffect(() => {
@@ -129,11 +137,11 @@ function Header() {
   }, [])
 
   const links = [
+    ['#classes', 'Classes & rates'],
     ['#about', 'About'],
     ['#experience', 'Experience'],
-    ['#approach', 'Approach'],
-    ['#classes', 'Classes'],
     ['#gallery', 'Gallery'],
+    ['#contact', 'Contact'],
   ]
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
@@ -145,8 +153,8 @@ function Header() {
           {links.map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
           ))}
-          <a href="#contact" className="nav-cta" onClick={() => setOpen(false)}>Book a class</a>
         </nav>
+        <WhatsAppButton className="btn btn-dark btn-sm header-cta" size={16}>Book</WhatsAppButton>
         <button
           className="menu-btn"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -172,16 +180,25 @@ function Hero() {
             <em>Release.</em> Breathe.
           </h1>
           <p className="hero-sub">
-            I'm <strong>{profile.shortName}</strong>, {profile.name}. I teach Vinyasa, Yin and a little Hatha
-            in English, for private clients, groups, gyms and events.
+            I'm <strong>{profile.shortName}</strong> ({profile.name}). I teach{' '}
+            {styles.map((s) => s.name).join(', ').replace(/, ([^,]*)$/, ' and a little $1')}, in English.
           </p>
+
+          <div className="price-card" aria-label="Class rates">
+            {classes.map((c) => (
+              <a key={c.name} href="#classes" className="price-row">
+                <span className="price-name">{c.name}</span>
+                <span className="price-dots" aria-hidden="true" />
+                <span className="price-value">
+                  {c.per ? <>{c.price} <small>/ session</small></> : c.short}
+                </span>
+              </a>
+            ))}
+          </div>
+
           <div className="hero-actions">
-            <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon /> Book on WhatsApp
-            </a>
-            <a href="#experience" className="btn btn-outline">
-              View my experience <ArrowIcon />
-            </a>
+            <WhatsAppButton />
+            <a href={PHONE_TEL} className="btn btn-outline"><PhoneIcon size={18} /> {PHONE_DISPLAY}</a>
           </div>
         </div>
 
@@ -189,8 +206,8 @@ function Hero() {
           <div className="arch">
             <Photo
               name={profile.heroPhoto}
-              alt="Becky in one-legged wheel pose in front of a painted sunburst"
-              sizes="(max-width: 860px) 80vw, 440px"
+              alt="Becky in one-legged wheel pose on a yoga mat beside a garden pool"
+              sizes="(max-width: 860px) 80vw, 420px"
               eager
             />
           </div>
@@ -206,138 +223,11 @@ function Hero() {
       </div>
 
       <div className="container">
-        <dl className="stats">
-          {stats.map((s) => (
-            <div key={s.value + s.label} className="stat">
-              <dt>{s.value}</dt>
-              <dd>{s.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  )
-}
-
-function About() {
-  return (
-    <section className="section" id="about">
-      <div className="container about-grid">
-        <div className="about-photo reveal">
-          <Photo name={profile.photo} alt={`Portrait of ${profile.name}, ${profile.title}`} sizes="(max-width: 860px) 90vw, 420px" />
-        </div>
-        <div className="reveal">
-          <Label>About me</Label>
-          <h2 className="section-title">Hi, I'm Becky.</h2>
-          {profile.bio.map((p) => <p key={p} className="body-text">{p}</p>)}
-          <ul className="facts">
-            <li><span>Name</span>{profile.name}</li>
-            <li><span>Teaches in</span>{profile.language}</li>
-            <li><span>Based in</span>{profile.location}</li>
+        <div className="taught-at">
+          <span className="taught-label">Taught at</span>
+          <ul>
+            {taughtAt.map((t) => <li key={t}>{t}</li>)}
           </ul>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function Experience() {
-  return (
-    <section className="section section-sand" id="experience">
-      <div className="container">
-        <div className="section-head reveal">
-          <Label>Experience</Label>
-          <h2 className="section-title">Where I've taught</h2>
-          <p className="lead">Gyms, festivals, stadiums and wellness events. Here's where I've led classes so far.</p>
-        </div>
-        <ol className="exp-list">
-          {experience.map((e, i) => (
-            <li key={e.place} className="exp reveal" style={{ '--d': `${(i % 3) * 70}ms` }}>
-              <span className="exp-num">{String(i + 1).padStart(2, '0')}</span>
-              <div className="exp-body">
-                <span className="exp-kind">{e.kind}</span>
-                <h3>{e.place}</h3>
-                <p className="exp-role">{e.role}</p>
-                <p>{e.text}</p>
-                {e.video && GYM_VIDEO && (
-                  <a href="#in-class" className="text-link">Watch me teach here <ArrowIcon /></a>
-                )}
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
-function Credentials({ onOpen }) {
-  return (
-    <section className="section" id="credentials">
-      <div className="container cert-grid">
-        <div className="reveal">
-          <Label>Certification</Label>
-          <h2 className="section-title">{certificate.award}</h2>
-          <p className="cert-event">{certificate.event}</p>
-          <p className="body-text">{certificate.training}</p>
-          <dl className="cert-details">
-            {certificate.details.map((d) => (
-              <div key={d.label}>
-                <dt>{d.label}</dt>
-                <dd>{d.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <button
-          className="cert-frame reveal"
-          onClick={() => onOpen({ name: certificate.image, alt: `${certificate.title}: ${certificate.award}, ${certificate.event}`, large: true })}
-          aria-label="View the certificate full size"
-        >
-          <Photo
-            name={certificate.image}
-            alt={`${certificate.title} awarded to ${profile.name}: ${certificate.award}, ${certificate.event}`}
-            sizes="(max-width: 860px) 92vw, 600px"
-          />
-          <span className="zoom-hint"><ExpandIcon /> View full size</span>
-        </button>
-      </div>
-    </section>
-  )
-}
-
-function Approach() {
-  return (
-    <section className="section section-deep" id="approach">
-      <div className="container">
-        <div className="section-head reveal">
-          <Label light>My approach</Label>
-          <h2 className="section-title light">Every class moves through four parts</h2>
-          <p className="lead light">
-            Comfort comes first. I use yoga balls and massagers so that opening up feels supported, never forced.
-          </p>
-        </div>
-        <ol className="flow">
-          {classFlow.map((f, i) => (
-            <li key={f.step} className="flow-step reveal" style={{ '--d': `${i * 80}ms` }}>
-              <span className="flow-num">{i + 1}</span>
-              <h3>{f.step}</h3>
-              <p>{f.text}</p>
-            </li>
-          ))}
-        </ol>
-
-        <h3 className="sub-title light reveal">Styles I teach</h3>
-        <div className="styles">
-          {styles.map((s) => (
-            <article key={s.name} className="style reveal">
-              <div className="style-head">
-                <h4>{s.name}</h4>
-                <span className={`style-note ${s.note === 'Occasionally' ? 'muted' : ''}`}>{s.note}</span>
-              </div>
-              <p>{s.text}</p>
-            </article>
-          ))}
         </div>
       </div>
     </section>
@@ -348,11 +238,14 @@ function Classes() {
   return (
     <section className="section" id="classes">
       <div className="container">
-        <div className="section-head center reveal">
-          <Label>Classes &amp; rates</Label>
-          <h2 className="section-title">Find the class that fits you</h2>
-          <p className="lead">All classes are taught in English. Prices are in Malawi Kwacha.</p>
+        <div className="section-head split reveal">
+          <div>
+            <Label>Classes &amp; rates</Label>
+            <h2 className="section-title">Pick your class, book on WhatsApp</h2>
+          </div>
+          <p className="lead">All classes are taught in English. Prices are per session, in Malawi Kwacha.</p>
         </div>
+
         <div className="pricing">
           {classes.map((c) => (
             <article key={c.name} className={`plan reveal ${c.featured ? 'featured' : ''}`}>
@@ -372,24 +265,137 @@ function Classes() {
                     {c.link.label} <ArrowIcon />
                   </a>
                 )}
-                <a
-                  href={whatsappLink(c.cta)}
+                <WhatsAppButton
+                  text={c.cta}
                   className={`btn ${c.featured ? 'btn-primary' : 'btn-outline'} btn-block`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  size={18}
                 >
-                  <WhatsAppIcon size={18} /> {c.price.startsWith('MWK') ? 'Book this class' : 'Ask about rates'}
-                </a>
+                  {c.per ? 'Book this class' : 'Ask about rates'}
+                </WhatsAppButton>
               </div>
             </article>
           ))}
         </div>
+
+        <div className="method reveal" id="approach">
+          <div className="method-flow">
+            <h3>What happens in every class</h3>
+            <ol className="flow">
+              {classFlow.map((f, i) => (
+                <li key={f.step}>
+                  <span className="flow-num">{i + 1}</span>
+                  <div>
+                    <h4>{f.step}</h4>
+                    <p>{f.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="method-styles">
+            <h3>Styles I teach</h3>
+            <ul className="style-list">
+              {styles.map((s) => (
+                <li key={s.name}>
+                  <h4>{s.name}{s.note && <small> · {s.note}</small>}</h4>
+                  <p>{s.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <p className="events-note reveal">
           <strong>Planning an event?</strong> I've taught at Lake of Stars and with Stories by Lota and Pilates by Bike.{' '}
           <a href={whatsappLink("Hi Becky, I'd like to book you for a yoga session at an event.")} target="_blank" rel="noopener noreferrer">
             Book me for yours
           </a>
         </p>
+      </div>
+    </section>
+  )
+}
+
+function About({ onOpen }) {
+  const openCert = () => onOpen({ name: certificate.image, alt: `${certificate.title}: ${certificate.award}, ${certificate.event}`, large: true })
+  return (
+    <section className="section section-sand" id="about">
+      <div className="container about-grid">
+        <div className="about-photo reveal">
+          <Photo name={profile.photo} alt={`${profile.name} in a standing split, smiling, in front of a painted sunburst`} sizes="(max-width: 860px) 90vw, 440px" />
+        </div>
+        <div className="reveal">
+          <Label>About me</Label>
+          <h2 className="section-title">Hi, I'm Becky.</h2>
+          {profile.bio.map((p) => <p key={p} className="body-text">{p}</p>)}
+          <dl className="facts">
+            {facts.map((f) => (
+              <div key={f.label}>
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="cert-card" id="credentials">
+            <button className="cert-thumb" onClick={openCert} aria-label="View the certificate full size">
+              <Photo name={certificate.image} alt={`${certificate.title} awarded to ${profile.name}`} sizes="200px" />
+              <span className="cert-zoom" aria-hidden="true"><ExpandIcon /></span>
+            </button>
+            <div>
+              <span className="cert-kicker"><span className="medal" aria-hidden="true"><span>1<sup>st</sup></span></span> Certified · {certificate.title}</span>
+              <h3>{certificate.award}</h3>
+              <p className="cert-event">{certificate.event}</p>
+              <p className="cert-meta">{certificate.training}</p>
+              <p className="cert-meta small">{certificate.issuer} · No. {certificate.number} · {certificate.issued}</p>
+              <button className="text-link as-button" onClick={openCert}>View certificate <ArrowIcon /></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Experience() {
+  return (
+    <section className="section" id="experience">
+      <div className="container">
+        <div className="section-head split reveal">
+          <div>
+            <Label>Experience</Label>
+            <h2 className="section-title">Where I've taught</h2>
+          </div>
+          <p className="lead">Gyms, festivals, a stadium and wellness events.</p>
+        </div>
+        <div className={`exp-grid ${GYM_VIDEO ? 'has-video' : ''}`}>
+          <ol className="exp-list">
+            {experience.map((e) => (
+              <li key={e.place} className="exp reveal">
+                <span className="exp-kind">{e.kind}</span>
+                <div>
+                  <h3>{e.place}</h3>
+                  <p><strong>{e.role}.</strong> {e.text}</p>
+                  {e.video && GYM_VIDEO && (
+                    <a href="#in-class" className="text-link">Watch me teach here <ArrowIcon /></a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          {GYM_VIDEO && (
+            <figure className="video-card reveal" id="in-class">
+              <div className="video-frame">
+                <video src={GYM_VIDEO} poster={GYM_VIDEO_POSTER} controls playsInline preload="none" />
+              </div>
+              <figcaption>
+                <span className="exp-kind">In class</span>
+                Teaching at Koahkh Fit Gym
+              </figcaption>
+            </figure>
+          )}
+        </div>
       </div>
     </section>
   )
@@ -403,25 +409,11 @@ function Gallery({ onOpen }) {
           <Label>Gallery</Label>
           <h2 className="section-title">On the mat</h2>
         </div>
-
-        {GYM_VIDEO && (
-          <div className="video-feature reveal" id="in-class">
-            <div>
-              <span className="exp-kind">In class</span>
-              <h3>Teaching at Koahkh Fit Gym, Area 22</h3>
-              <p className="body-text">A look inside one of my classes: warming up, moving through the stretches and finishing calm.</p>
-            </div>
-            <div className="video-frame">
-              <video src={GYM_VIDEO} poster="/images/koakh-class-poster.webp" controls playsInline preload="metadata" />
-            </div>
-          </div>
-        )}
-
         <div className="gallery">
           {gallery.map((g) => (
             <figure key={g.image} className={`tile tile-${g.image} reveal`}>
               <button onClick={() => onOpen({ name: g.image, alt: g.alt })} aria-label={`View larger: ${g.caption}`}>
-                <Photo name={g.image} alt={g.alt} sizes={g.wide ? '(max-width: 760px) 100vw, 760px' : '(max-width: 760px) 50vw, 380px'} />
+                <Photo name={g.image} alt={g.alt} sizes="(max-width: 640px) 50vw, 400px" />
               </button>
               <figcaption>{g.caption}</figcaption>
             </figure>
@@ -441,11 +433,7 @@ function Contact() {
         <p className="lead light">
           Private sessions, group classes, flexibility training or yoga for your event. Message me and we'll find a time.
         </p>
-        <div className="contact-actions">
-          <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="btn btn-light btn-lg" target="_blank" rel="noopener noreferrer">
-            <WhatsAppIcon /> WhatsApp me
-          </a>
-        </div>
+        <WhatsAppButton className="btn btn-light btn-lg">WhatsApp me</WhatsAppButton>
         <ul className="contact-list">
           <li>
             <a href={PHONE_TEL}><PhoneIcon size={18} /><span><small>Call</small>{PHONE_DISPLAY}</span></a>
@@ -487,10 +475,7 @@ function Lightbox({ photo, onClose }) {
     >
       {photo && (
         <>
-          <img
-            src={`/images/${photo.name}-${photo.large ? 1600 : 960}.webp`}
-            alt={photo.alt}
-          />
+          <img src={`/images/${photo.name}-${photo.large ? 1600 : 960}.webp`} alt={photo.alt} />
           <button className="lightbox-close" onClick={onClose} aria-label="Close"><CloseIcon /></button>
         </>
       )}
@@ -498,17 +483,18 @@ function Lightbox({ photo, onClose }) {
   )
 }
 
-function FloatingWhatsApp() {
+// Desktop: floating WhatsApp button. Phones: a fixed bar with WhatsApp + Call.
+function QuickContact() {
   return (
-    <a
-      href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-      className="fab"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with Becky on WhatsApp"
-    >
-      <WhatsAppIcon size={26} />
-    </a>
+    <>
+      <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="fab" target="_blank" rel="noopener noreferrer" aria-label="Chat with Becky on WhatsApp">
+        <WhatsAppIcon size={26} />
+      </a>
+      <div className="action-bar">
+        <WhatsAppButton className="btn btn-primary" size={18}>WhatsApp</WhatsAppButton>
+        <a href={PHONE_TEL} className="btn btn-dark"><PhoneIcon size={18} /> Call</a>
+      </div>
+    </>
   )
 }
 
@@ -521,16 +507,14 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
-        <About />
-        <Experience />
-        <Credentials onOpen={setPhoto} />
-        <Approach />
         <Classes />
+        <About onOpen={setPhoto} />
+        <Experience />
         <Gallery onOpen={setPhoto} />
         <Contact />
       </main>
       <Footer />
-      <FloatingWhatsApp />
+      <QuickContact />
       <Lightbox photo={photo} onClose={() => setPhoto(null)} />
     </>
   )
