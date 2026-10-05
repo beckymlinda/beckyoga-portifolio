@@ -412,7 +412,7 @@ function Gallery({ onOpen }) {
               <p className="body-text">A look inside one of my classes: warming up, moving through the stretches and finishing calm.</p>
             </div>
             <div className="video-frame">
-              <video src={GYM_VIDEO} controls playsInline preload="metadata" />
+              <video src={GYM_VIDEO} poster="/images/koakh-class-poster.webp" controls playsInline preload="metadata" />
             </div>
           </div>
         )}
