@@ -17,6 +17,10 @@ const photos = {
   'standing-split': { file: 'standing-split.jpg' },
   'pool-split': { file: 'pool-split.jpg' },
   'pool-wheel': { file: 'pool-wheel.jpg' },
+  'lake-of-stars': { file: 'lake-of-stars.jpg' },
+  'bingu-group': { file: 'bingu-group.jpg' },
+  'bingu-stretch': { file: 'bingu-stretch.jpg' },
+  'pilates-by-bike': { file: 'pilates-by-bike.jpg' },
   // Rendered from the certificate PDF; the larger size is for the full-screen view
   certificate: { file: 'certificate.png', widths: [480, 960, 1600], quality: 85 },
 }

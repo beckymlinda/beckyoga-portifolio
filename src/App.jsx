@@ -75,10 +75,11 @@ function Lotus({ size = 18 }) {
 
 /* ---------- Helpers ---------- */
 
-function Photo({ name, alt, sizes = '(max-width: 760px) 100vw, 50vw', className, eager = false }) {
+function Photo({ name, alt, sizes = '(max-width: 760px) 100vw, 50vw', className, style, eager = false }) {
   return (
     <img
       className={className}
+      style={style}
       src={`/images/${name}-960.webp`}
       srcSet={`/images/${name}-480.webp 480w, /images/${name}-960.webp 960w`}
       sizes={sizes}
@@ -357,7 +358,9 @@ function About({ onOpen }) {
   )
 }
 
-function Experience() {
+function Experience({ onOpen }) {
+  const featured = experience.filter((e) => e.photos)
+  const others = experience.filter((e) => !e.photos)
   return (
     <section className="section" id="experience">
       <div className="container">
@@ -366,11 +369,32 @@ function Experience() {
             <Label>Experience</Label>
             <h2 className="section-title">Where I've taught</h2>
           </div>
-          <p className="lead">Gyms, festivals, a stadium and wellness events.</p>
+          <p className="lead">Festivals, a stadium, gyms and wellness events.</p>
         </div>
+
+        <div className="events">
+          {featured.map((e) => (
+            <article key={e.place} className="event reveal">
+              <div className={`event-media count-${e.photos.length}`}>
+                {e.photos.map((ph) => (
+                  <button key={ph.image} onClick={() => onOpen({ name: ph.image, alt: ph.alt })} aria-label={`View larger: ${ph.alt}`}>
+                    <Photo name={ph.image} alt={ph.alt} sizes="(max-width: 760px) 100vw, 380px" style={{ objectPosition: ph.pos }} />
+                  </button>
+                ))}
+                {e.date && <span className="event-date">{e.date}</span>}
+              </div>
+              <div className="event-body">
+                <span className="exp-kind">{e.kind}</span>
+                <h3>{e.place}</h3>
+                <p><strong>{e.role}.</strong> {e.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
         <div className={`exp-grid ${GYM_VIDEO ? 'has-video' : ''}`}>
           <ol className="exp-list">
-            {experience.map((e) => (
+            {others.map((e) => (
               <li key={e.place} className="exp reveal">
                 <span className="exp-kind">{e.kind}</span>
                 <div>
@@ -509,7 +533,7 @@ export default function App() {
         <Hero />
         <Classes />
         <About onOpen={setPhoto} />
-        <Experience />
+        <Experience onOpen={setPhoto} />
         <Gallery onOpen={setPhoto} />
         <Contact />
       </main>

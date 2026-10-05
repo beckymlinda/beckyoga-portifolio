@@ -39,14 +39,40 @@ export const facts = [
   { label: 'Biggest class', value: '20 people' },
 ]
 
-export const taughtAt = ['Lake of Stars', 'Koahkh Fit Gym', 'Bingu Stadium', 'Stories by Lota', 'Pilates by Bike']
+export const taughtAt = ['Bingu Stadium', 'Lake of Stars', 'Pilates by Bike', 'Koahkh Fit Gym', 'Stories by Lota']
 
+// Events with photos are shown as featured cards (newest first); the rest as a compact list.
 export const experience = [
+  {
+    place: 'Bingu Stadium',
+    kind: 'Open class',
+    date: '19 March 2026',
+    role: 'Lead instructor',
+    text: 'Open-air yoga at Bingu National Stadium. My biggest class so far: twenty people moving and breathing together.',
+    photos: [
+      { image: 'bingu-group', alt: 'Becky with her class posing joyfully at Bingu Stadium', pos: '50% 42%' },
+      { image: 'bingu-stretch', alt: 'Becky leading a low-lunge stretch on the Bingu Stadium track', pos: '60% 60%' },
+    ],
+  },
   {
     place: 'Lake of Stars Festival',
     kind: 'Festival',
+    date: '7 September 2024',
     role: 'Yoga instructor',
-    text: "Led yoga sessions for festival-goers at Malawi's best-known music and arts festival.",
+    text: "Led yoga on the Kweza stage at Lake of Stars' 20th anniversary, Fish Eagle Bay Lodge, Nkhotakota.",
+    photos: [
+      { image: 'lake-of-stars', alt: 'Becky leading tree pose on the Kweza stage at Lake of Stars festival', pos: '50% 50%' },
+    ],
+  },
+  {
+    place: 'Pilates by Bike',
+    kind: 'Event',
+    date: '22 June',
+    role: 'Event instructor',
+    text: 'Led a yoga session on the lawn at an outdoor event organised with Pilates by Bike.',
+    photos: [
+      { image: 'pilates-by-bike', alt: 'Becky leading a seated session on the lawn at a Pilates by Bike event', pos: '50% 42%' },
+    ],
   },
   {
     place: 'Koahkh Fit Gym, Area 22',
@@ -56,22 +82,10 @@ export const experience = [
     video: true,
   },
   {
-    place: 'Bingu Stadium',
-    kind: 'Open class',
-    role: 'Lead instructor',
-    text: 'My biggest class to date: twenty people moving and breathing together.',
-  },
-  {
     place: 'Stories by Lota',
     kind: 'Events',
     role: 'Event instructor',
     text: 'Instructed yoga at wellness events organised by Stories by Lota.',
-  },
-  {
-    place: 'Pilates by Bike',
-    kind: 'Events',
-    role: 'Event instructor',
-    text: 'Instructed yoga at events organised with Pilates by Bike.',
   },
   {
     place: 'Private & group clients',
