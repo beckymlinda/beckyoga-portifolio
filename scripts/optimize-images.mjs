@@ -21,6 +21,7 @@ const photos = {
   'bingu-group': { file: 'bingu-group.jpg' },
   'bingu-stretch': { file: 'bingu-stretch.jpg' },
   'pilates-by-bike': { file: 'pilates-by-bike.jpg' },
+  pigeon: { file: 'pigeon.jpg' },
   // Rendered from the certificate PDF; the larger size is for the full-screen view
   certificate: { file: 'certificate.png', widths: [480, 960, 1600], quality: 85 },
 }

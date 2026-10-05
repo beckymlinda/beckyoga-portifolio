@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   PHONE_DISPLAY, PHONE_TEL, EMAIL, DEFAULT_WHATSAPP_MESSAGE, whatsappLink, GYM_VIDEO, GYM_VIDEO_POSTER,
-  profile, facts, taughtAt, experience, certificate, classFlow, styles, classes, gallery,
+  profile, journey, facts, taughtAt, experience, certificate, classFlow, styles, classes, gallery,
 } from './data.js'
 
 /* ---------- Icons ---------- */
@@ -353,6 +353,19 @@ function About({ onOpen }) {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="container journey reveal">
+        <h3>My journey</h3>
+        <ol className="journey-list">
+          {journey.map((j) => (
+            <li key={j.title}>
+              <span className="journey-year">{j.year}</span>
+              <h4>{j.title}</h4>
+              <p>{j.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

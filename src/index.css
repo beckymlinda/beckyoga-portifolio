@@ -313,6 +313,22 @@ p { text-wrap: pretty; }
 .cert-meta { margin: 0 0 6px; color: var(--muted); font-size: .92rem; }
 .cert-meta.small { font-size: .8rem; margin-bottom: 10px; }
 
+.journey { margin-top: clamp(56px, 7vw, 80px); }
+.journey h3 { font-family: var(--serif); font-weight: 600; font-size: 1.6rem; letter-spacing: -.01em; margin: 0 0 24px; }
+.journey-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 24px; }
+.journey-list li { position: relative; padding-top: 30px; }
+/* Line through the dots, joining each step to the next */
+.journey-list li::before { content: ''; position: absolute; top: 7px; left: 0; right: -24px; height: 2px; background: #e3cfc6; }
+.journey-list li:last-child::before { right: 0; background: linear-gradient(90deg, #e3cfc6, transparent); }
+.journey-list li::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--sand); border: 3px solid var(--rose);
+}
+.journey-list li:last-child::after { background: var(--rose); }
+.journey-year { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--rose); letter-spacing: -.02em; line-height: 1; }
+.journey-list h4 { margin: 8px 0 4px; font-size: 1.05rem; font-weight: 600; }
+.journey-list p { margin: 0; color: var(--muted); font-size: .95rem; }
+
 /* Experience */
 .events { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
 .event { display: flex; flex-direction: column; border-radius: var(--radius); overflow: hidden; background: var(--surface); box-shadow: var(--shadow); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
@@ -359,13 +375,13 @@ p { text-wrap: pretty; }
   display: grid; grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 280px 280px; gap: 16px;
   grid-template-areas:
-    'splits splits pool head'
-    'wheel elbow pool head';
+    'splits splits pool elbow'
+    'pigeon wheel pool elbow';
 }
 .tile { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--line); }
 .tile-splits { grid-area: splits; }
 .tile-pool-split { grid-area: pool; }
-.tile-headstand { grid-area: head; }
+.tile-pigeon { grid-area: pigeon; }
 .tile-wheel { grid-area: wheel; }
 .tile-elbow-stand { grid-area: elbow; }
 .tile button { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
@@ -375,6 +391,7 @@ p { text-wrap: pretty; }
 .tile-pool-split img { object-position: 45% 55%; }
 .tile-wheel img { object-position: 50% 62%; }
 .tile-elbow-stand img { object-position: 50% 46%; }
+.tile-pigeon img { object-position: 55% 50%; }
 .tile figcaption {
   position: absolute; left: 12px; bottom: 12px; pointer-events: none;
   padding: 6px 12px; border-radius: 999px;
@@ -453,6 +470,8 @@ p { text-wrap: pretty; }
   .style-list { grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .exp-grid.has-video { grid-template-columns: 1fr 260px; }
   .events { grid-template-columns: repeat(2, 1fr); }
+  .journey-list { grid-template-columns: repeat(2, 1fr); gap: 28px 24px; }
+  .journey-list li:nth-child(2n)::before { right: 0; }
   .events .event:first-child { grid-column: 1 / -1; }
   .events .event:first-child .event-media { aspect-ratio: 16 / 7; }
 }
@@ -517,12 +536,18 @@ p { text-wrap: pretty; }
   .about-photo::before { inset: 14px -14px -14px 14px; }
   .cert-card { grid-template-columns: 1fr; gap: 16px; }
   .exp { grid-template-columns: 1fr; gap: 8px; }
+  .journey-list { grid-template-columns: 1fr; gap: 0; }
+  .journey-list li { padding: 0 0 24px 34px; }
+  .journey-list li::before { top: 12px; bottom: -4px; left: 7px; right: auto; width: 2px; height: auto; }
+  .journey-list li::after { top: 4px; }
+  .journey-list li:last-child::before { display: none; }
+  .journey-list li:last-child { padding-bottom: 0; }
   .events { grid-template-columns: 1fr; margin-bottom: 32px; }
   .events .event:first-child .event-media { aspect-ratio: 4 / 3; }
   .event-media.count-2 { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr); aspect-ratio: 4 / 5; }
   .gallery {
     grid-template-columns: 1fr 1fr; grid-template-rows: 200px 300px 220px; gap: 10px;
-    grid-template-areas: 'splits splits' 'pool head' 'wheel elbow';
+    grid-template-areas: 'splits splits' 'pool elbow' 'pigeon wheel';
   }
   .tile figcaption { left: 8px; bottom: 8px; font-size: .72rem; padding: 5px 10px; }
   .events-note { border-radius: var(--radius); }

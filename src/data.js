@@ -28,10 +28,18 @@ export const profile = {
   photo: 'standing-split',
   heroPhoto: 'pool-wheel',
   bio: [
-    "I'm Rabecca Mulinda, but almost everyone knows me as Becky. I teach Vinyasa, Yin and a little Hatha, always in English, to private clients, groups, gyms and events.",
+    "I'm Rabecca Mulinda, but almost everyone knows me as Becky. My journey started with flexibility training in 2015 and led me to yoga in 2020. Today I teach Vinyasa, Yin and a little Hatha, always in English, to private clients, groups, gyms and events.",
     'My classes are built to feel good: we warm up, stretch, release tension with yoga balls and massagers, and finish in meditation. You leave looser, lighter and calmer than you arrived.',
   ],
 }
+
+// Becky's path into teaching, shown as a timeline in About
+export const journey = [
+  { year: '2015', title: 'Flexibility training', text: 'I started out with flexibility training.' },
+  { year: 'Then', title: 'Contortion', text: "I was introduced to contortion, but I realised something was missing: being flexible on its own wasn't enough." },
+  { year: '2020', title: 'Yoga', text: "I discovered yoga, and that's when I started taking yoga classes." },
+  { year: '2026', title: 'Pilates', text: 'I explored Pilates and found that it and yoga complement each other.' },
+]
 
 export const facts = [
   { label: 'Teaches in', value: 'English' },
@@ -151,7 +159,7 @@ export const classes = [
 export const gallery = [
   { image: 'splits', alt: 'Becky in a front split with a deep backbend', caption: 'Front split with backbend' },
   { image: 'pool-split', alt: 'Becky in a side split with a backbend beside a garden pool', caption: 'Side split by the pool' },
-  { image: 'headstand', alt: 'Becky holding a headstand against a red backdrop', caption: 'Headstand' },
+  { image: 'pigeon', alt: 'Becky in king pigeon pose, reaching back to hold her foot', caption: 'Pigeon pose' },
   { image: 'wheel', alt: 'Becky in one-legged wheel pose on the grass', caption: 'One-legged wheel' },
   { image: 'elbow-stand', alt: 'Becky in a deep forearm balance backbend at the wall', caption: 'Forearm balance' },
 ]
